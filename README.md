@@ -2,6 +2,8 @@
 
 Sistema de encurtamento de URLs com arquitetura otimizada para **baixa latência** e **alto throughput**.
 
+![play](https://github.com/eumatoliveira/linkly/blob/main/Screenshot_14.png)
+
 ## 🎯 Características Técnicas
 
 - **Unicidade garantida**: Base62 encoding de IDs sequenciais (zero colisões)
