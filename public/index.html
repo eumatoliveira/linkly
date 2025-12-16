@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="URL shortener production-ready com baixa latência"
+    />
+    <title>Linkly - URL Shortener</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-gradient"></div>
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="32" height="32" rx="8" fill="url(#gradient)" />
+            <path
+              d="M10 16L14 20L22 12"
+              stroke="white"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#667eea" />
+                <stop offset="100%" stop-color="#764ba2" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <h1>Linkly</h1>
+        </div>
+        <p class="tagline">Production-ready URL shortener</p>
+      </header>
+
+      <main class="main-content">
+        <div class="card primary-card">
+          <h2 class="card-title">Encurtar URL</h2>
+          <p class="card-subtitle">
+            Cole sua URL longa e receba um link curto instantaneamente
+          </p>
+
+          <form id="shortenForm" class="shorten-form">
+            <div class="input-group">
+              <input
+                type="url"
+                id="urlInput"
+                class="url-input"
+                placeholder="https://example.com/very/long/url/here"
+                required
+              />
+              <button type="submit" class="btn btn-primary" id="shortenBtn">
+                <span class="btn-text">Encurtar</span>
+                <div class="btn-loader"></div>
+              </button>
+            </div>
+
+            <div class="advanced-options collapsed" id="advancedOptions">
+              <label class="checkbox-label">
+                <input type="checkbox" id="expirationToggle" />
+                <span>Adicionar expiração</span>
+              </label>
+              <div
+                class="expiration-input"
+                id="expirationInput"
+                style="display: none"
+              >
+                <input type="datetime-local" id="expirationDate" />
+              </div>
+            </div>
+          </form>
+
+          <div
+            class="result-container"
+            id="resultContainer"
+            style="display: none"
+          >
+            <div class="result-card">
+              <div class="result-header">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M16.5 10.5L10 17L3.5 10.5"
+                    stroke="#10b981"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#10b981"
+                    stroke-width="2"
+                  />
+                </svg>
+                <span>URL Encurtada com Sucesso!</span>
+              </div>
+              <div class="short-url-display">
+                <input type="text" id="shortUrlDisplay" readonly />
+                <button class="btn btn-copy" id="copyBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect
+                      x="9"
+                      y="9"
+                      width="13"
+                      height="13"
+                      rx="2"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  <span class="copy-text">Copiar</span>
+                </button>
+              </div>
+              <div class="result-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Código:</span>
+                  <span class="meta-value" id="shortCode">-</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Original:</span>
+                  <span class="meta-value truncate" id="originalUrl">-</span>
+                </div>
+              </div>
+              <button class="btn btn-stats" id="viewStatsBtn">
+                📊 Ver Estatísticas
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-section" id="statsSection" style="display: none">
+          <div class="card stats-card">
+            <h3 class="card-title">📈 Estatísticas</h3>
+            <div class="stats-grid" id="statsGrid">
+              <div class="stat-item">
+                <div class="stat-icon">👆</div>
+                <div class="stat-content">
+                  <div class="stat-label">Cliques</div>
+                  <div class="stat-value" id="clickCount">0</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">📅</div>
+                <div class="stat-content">
+                  <div class="stat-label">Criado em</div>
+                  <div class="stat-value" id="createdAt">-</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-content">
+                  <div class="stat-label">Expira em</div>
+                  <div class="stat-value" id="expiresAt">Nunca</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Baixa Latência</h3>
+            <p>p50 < 50ms com cache Redis</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Zero Colisões</h3>
+            <p>Base62 encoding garantido</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analytics</h3>
+            <p>Tracking de cliques em tempo real</p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>
+          Built with Staff-level engineering •
+          <a href="/api/health" target="_blank">Health Check</a> •
+          <a href="https://github.com" target="_blank">GitHub</a>
+        </p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast">
+      <span id="toastMessage"></span>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
